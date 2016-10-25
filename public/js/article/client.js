@@ -1,10 +1,10 @@
 //article domain 객체
-function Article(input_title, input_content, input_write) {
+function Article(input_title, input_content, input_writer) {
 
 	var num = 0;
 	var title = input_title;
 	var content = input_content;
-	var writer = input_write;
+	var writer = input_writer;
 	var readCount = 0;
 
 	this.getNum = function() {
