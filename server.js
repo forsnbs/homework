@@ -252,6 +252,13 @@ var ArticleController = function() {
 		
 	};
 	
+//  글수정 controller 메서드
+	this.requestUpdate = function(article) {
+		
+		var isSuccess = dao.deleteDao(num);
+		return isSuccess;
+	}
+	
 };
 
 //Node 서버 및 라우터
@@ -322,6 +329,21 @@ app.all('/delete', function(req, res) {
 	console.log('응답 데이터');
 	console.log(isSuccess);
 	res.send(isSuccess);
+	
+});
+
+app.all('/update', function(req, res) {
+	
+	console.log('/update를 요청 받음');
+	var num = parseInt(req.param('num'));
+	var title = req.param('title');
+	var content = req.param('content');
+	var writer = req.param('writer');
+	
+	article.setNum(num);
+	
+	var article = new Article(title,content,writer);
+	var isSuccess = articleController.requestUpdate(article);
 	
 });
 
