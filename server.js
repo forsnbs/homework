@@ -212,6 +212,33 @@ function ArticleDao() {
 		return isSuccess;
 		
 	};
+//  글 수정 dao메서드
+	this.updateDao = function(article) {
+		
+		var isSuccess;
+		
+		try {
+			var articles = repository.getArticles();
+			
+			console.log('수정할 글번호 : ' + article.getNum());
+			console.log(' 타이틀왓니 :' + article.getTitle());
+			
+			for (var i = 0; i < articles.length; i++) {
+				if(articles[i].num === article.getNum()) {
+					articles[i].title = article.getTitle();
+					articles[i].content = article.getContent();
+					articles[i].writer = article.getWriter();
+					
+					isSuccess = {message : true };
+					break;
+				}
+			}
+		} catch (e) {
+			console.log('ArticleDao 객체 : updateDao 메서드에서 예외 발생');
+			console.log(e.message);
+			isSuccess = { message : false };
+		}
+	};
 	
 }
 
@@ -255,9 +282,9 @@ var ArticleController = function() {
 //  글수정 controller 메서드
 	this.requestUpdate = function(article) {
 		
-		var isSuccess = dao.deleteDao(num);
+		var isSuccess = dao.updateDao(article);
 		return isSuccess;
-	}
+	};
 	
 };
 
@@ -340,9 +367,8 @@ app.all('/update', function(req, res) {
 	var content = req.param('content');
 	var writer = req.param('writer');
 	
-	article.setNum(num);
-	
 	var article = new Article(title,content,writer);
+	article.setNum(num);
 	var isSuccess = articleController.requestUpdate(article);
 	
 });
