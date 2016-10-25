@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+﻿var fs = require('fs');
+eval(fs.readFileSync('ArticleController.js')+'');
+=======
 ﻿function Article(input_title, input_content, input_writer) {
 
 	var num = 0;
@@ -287,6 +291,7 @@ var ArticleController = function() {
 	};
 
 };
+>>>>>>> refs/remotes/origin/master
 
 //Node 서버 및 라우터
 var http = require('http');
@@ -303,6 +308,7 @@ http.createServer(app).listen(3000, function() {
 
 });
 
+// ArticleController 객체생성
 var articleController = new ArticleController();
 
 app.all('/save', function(req, res) {
