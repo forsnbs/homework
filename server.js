@@ -194,15 +194,15 @@ function ArticleDao() {
 		try {
 			var articles = repository.getArticles();
 			
-			console.log('삭제할 글 번호 : ' + num);
-			
-			for(var i = 0 ; i < articles.length ; i++) {								
-				if(articles[i].num === num) {
+			for (var i = 0; i < articles.length; i++){
+				console.log(articles[i]);
+
+				if (articles[i].num == num){
 					articles.splice(i, 1);
 					isSuccess = { message : true };
-					break;
 				}
 			}
+			
 		} catch(e) {
 			console.log('ArticleDao 객체 : selectOneDao 메서드에서 예외 발생');
 			console.log(e.message);
@@ -313,10 +313,8 @@ app.all('/selectOne', function(req, res) {
 app.all('/delete', function(req, res) {
 	
 	console.log('/delete 를 요청 받음.');	
-	var num = parseInt(req.param('num'));
-	
-	console.log('여기' + num)
-	
+	var num = req.param('num');
+		
 	var isSuccess = articleController.requestDelete(num);
 	
 	console.log('응답 데이터');

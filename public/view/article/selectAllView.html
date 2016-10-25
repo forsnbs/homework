@@ -28,7 +28,7 @@
 		}
 		
 		for(var i = 0 ; i < articles.length ; i++) {			
-			var td_check = $('<td></td>').html('<input type="checkbox">');
+			var td_check = $('<td></td>').html('<input type="checkbox" class = "checkbox">');
 			var td_num = $('<td></td>').html(articles[i].num);			
 			var td_title = $('<td class="title_td"></td>').html(articles[i].title);
 			var td_writer = $('<td></td>').html(articles[i].writer);
@@ -41,6 +41,42 @@
 		
 	});
 	
+</script>
+
+<!-- 전부 선택 -->
+<script>
+$(document).ready(function(){
+	$('#select_all_button').click(function(){
+		$('.checkbox').prop('checked',true);
+	});
+});
+</script>
+
+<!-- 선택한 번호 띄우기-->
+<script>
+$(document).ready(function(){
+
+	var articles = Controllers.getArticleController().requestSelectAll();
+
+	$('#select_delete_button').click(function(){
+		
+	for (var i = 0; i < articles.length; i++){
+		if ($('tbody').children().eq(i).children().eq(0).children().eq(0).is(":checked") == true){
+			alert(i+'번째 체크박스는 체크됨');
+		} 
+	}
+	
+	});
+});
+</script>
+
+<!-- 삭제 -->
+<script>
+$(document).ready(function(){
+	$('#select_all_button').click(function(){
+		$('.checkbox').prop('checked',true);
+	});
+});
 </script>
 
 <!-- 글쓰기 이벤트 핸들링 -->
@@ -98,7 +134,11 @@
 		
 		</tbody>
 	</table>
-	<input type="button" id="write_button" value="글쓰기">
+	<div>
+		<input type="button" id="write_button" value="글쓰기">
+		<input type="button" id="select_all_button" value="전부 선택">
+		<input type="button" id="select_delete_button" value="삭제">
+	</div>
 </body>
 </html>
 
